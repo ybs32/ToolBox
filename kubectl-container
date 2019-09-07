@@ -1,0 +1,13 @@
+#!/bin/bash
+
+pod="$1"
+
+name=`kubectl get pods ${pod} -o jsonpath='{.spec.containers[*].name}'`
+image=`kubectl get pods ${pod} -o jsonpath='{.spec.containers[*].image}'`
+
+names=(${name// / })
+images=(${image// / })
+
+for i in "${!names[@]}"; do 
+  echo "${names[$i]} (${images[$i]})"
+done
