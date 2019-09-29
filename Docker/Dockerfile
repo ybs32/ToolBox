@@ -6,7 +6,9 @@ ENV PATH $PATH:$ANDROID_HOME/bin
 USER root
 RUN apt update -y && \
     apt upgrade -y && \
-    apt install -y wget unzip
+    apt install -y wget unzip && \
+    apt clean && \
+    rm -rf /var/lib/apt/lists/*
 
 WORKDIR /Android/sdk
 RUN wget "https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip" && \
